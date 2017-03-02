@@ -17,6 +17,36 @@
 			$this->query = new query();
 		}
 		
+		
+		
+		public function extractCurrentPrice($document, $stockID,$name) {
+			$contents = str_getcsv($document);
+			//connect to database
+			$this->dbConnection->connect();
+			//prepare statement
+			$this->dbConnection->prepare($this->query->update_price());
+			//bind values to SQL statement
+			$this->dbConnection->bind(1, $contents[0]);
+			$this->dbConnection->bind(2, time());
+			$this->dbConnection->bind(3, $contents[1]);
+			$this->dbConnection->bind(4, $stockID);
+			//execute query
+			$this->dbConnection->execute();
+
+			// realtime update
+			$this->dbConnection->prepare($this->query->update_realtime($name));
+			//bind values to SQL statement
+			$this->dbConnection->bind(1, $stockID);
+			$this->dbConnection->bind(2, date("Y/m/d",time()));
+			$this->dbConnection->bind(3, date("H:i:s",time()));
+			$this->dbConnection->bind(4, $contents[0]);
+			$this->dbConnection->bind(5, $contents[1]);
+			$this->dbConnection->execute();
+			//disconnect from database
+			$this->dbConnection->disconnect();
+		}
+
+
 		//extract historical prices where $document is a CSV file of historical prices and $stockID is the ID for the given stock
 		public function extractHistorical($document, $stockID,$name) {			
 			//used to ignore first line of CSV file
@@ -52,32 +82,6 @@
 			$this->dbConnection->disconnect();
 		}
 		
-		public function extractCurrentPrice($document, $stockID,$name) {
-			$contents = str_getcsv($document);
-			//connect to database
-			$this->dbConnection->connect();
-			//prepare statement
-			$this->dbConnection->prepare($this->query->update_price());
-			//bind values to SQL statement
-			$this->dbConnection->bind(1, $contents[0]);
-			$this->dbConnection->bind(2, time());
-			$this->dbConnection->bind(3, $contents[1]);
-			$this->dbConnection->bind(4, $stockID);
-			//execute query
-			$this->dbConnection->execute();
-
-			// realtime update
-			$this->dbConnection->prepare($this->query->update_realtime($name));
-			//bind values to SQL statement
-			$this->dbConnection->bind(1, $stockID);
-			$this->dbConnection->bind(2, date("Y/m/d",time()));
-			$this->dbConnection->bind(3, date("H:i:s",time()));
-			$this->dbConnection->bind(4, $contents[0]);
-			$this->dbConnection->bind(5, $contents[1]);
-			$this->dbConnection->execute();
-			//disconnect from database
-			$this->dbConnection->disconnect();
-		}
 	}
 	
 	?>

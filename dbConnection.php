@@ -13,7 +13,7 @@
 		private $host = "localhost";
 		private $user = "root";
 		private $password = "";
-		private $db = "se";
+		private $db = "seteam";
 				
 		//connect to database
 		public function connect() {

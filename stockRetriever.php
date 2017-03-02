@@ -20,6 +20,14 @@
 			curl_close($ch);
 			return $data;
 		}	
+		
+		//retrieve current price
+		public function retrieveCurrentPrice($ticker) {
+			//create URL
+			$URL = $this->requestURL_current.$ticker."&f=l1v";
+			//return CSV file
+			return $this->get_content($URL);
+		}	
 
 		//retrieve historical prices for a $ticker from $startDate to $endDate and return CSV file
 		public function retrieveHistorical($ticker, $startDate, $endDate) {
@@ -34,13 +42,6 @@
 			return $this->get_content($URL);
 			
 		}	
-		
-		//retrieve current price
-		public function retrieveCurrentPrice($ticker) {
-			//create URL
-			$URL = $this->requestURL_current.$ticker."&f=l1v";
-			//return CSV file
-			return $this->get_content($URL);
-		}	
+
 	}
 ?>
