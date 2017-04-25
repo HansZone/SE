@@ -22,7 +22,7 @@ function KDJfunction($StockName)
     //calculate D9
     $D9=50;
 
-    for ($x=8; $x>=0; $x--)
+    for ($x=30; $x>=0; $x--)
     {
         //select  the latest day
         $sql = "SELECT date FROM {$StockName}_historical LIMIT $x,1";
