@@ -6,13 +6,27 @@
 <?php session_start();
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
-<title>Group #2|Stock Forecasting System</title>
-<link href="css/login/main.css" rel="stylesheet" type="text/css" />
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stock Forecasting System Login</title>
+
+<!-- CSS -->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="assets/css/form-elements.css">
+<link rel="stylesheet" href="assets/css/style.css">
+
+<!-- Favicon and touch icons -->
+<link rel="shortcut icon" href="assets/ico/favicon.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
 
 
 
@@ -59,6 +73,20 @@ if(isset($_POST["submit"]))
 }
  
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function test_input($data) 
 {
    $data = trim($data);
@@ -69,35 +97,74 @@ function test_input($data)
 ?>
 
 <!-- Main content wrapper -->
-<div class="loginWrapper">
-    <div class="loginLogo"><img src="img/login.png" alt="" /></div>
-    <div class="widget">
-        <div class="title"><img src="img/files.png" alt="" class="titleIcon" /><h6>Please Input your Username and Password</h6></div>
-        <form action="<?php echo $_SERVER['PHP_SELF']?>" id="validate" class="form" method="post">
-            <fieldset>
-                <div class="formRow">
-                    <label for="login">Username:</label>
-                    <div class="loginInput"><input type="username" name="username" class="validate[required]" id="login" /></div>
-                    <div class="clear"></div>
-                </div>
-                
-                <div class="formRow">
-                    <label for="pass">Password:</label>
-                    <div class="loginInput"><input type="password" name="password" class="validate[required]" id="pass" /></div>
-                    <div class="clear"></div>
-                </div>
-                
-                <div class="loginControl">
-                    <div class="remember">
-                    <input type="checkbox" id="remember" name="remember" /><label for="remember">Remember me</label></div>
-                    <input type="submit" value="Log me in" class="dredB logMeIn" name="submit" />
-                    <div class="clear"></div>
-                </div>
 
-            </fieldset>
-        </form>
-    </div>
-</div>    
+
+<div class="top-content">
+          
+            <div class="inner-bg">
+                <div class="container">
+                 
+
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2 text">
+                            <h1><strong>Please Login </strong></h1>
+                            <div class="description">
+                              <p>
+                                This is a free stock forecasting system. Enjoy your experience with our trustworthy financial suggestions!
+                              </p>
+                            </div>
+                        </div>
+                    </div>
+
+                  
+                   
+                        <div class="col-sm-6 col-sm-offset-3 form-box">
+                          <div class="form-top">
+                            <div class="form-top-left">
+
+                              <h3>Login to our site</h3>
+                                <p>Enter your username and password to log on:</p>
+                            </div>
+                            <div class="form-top-right">
+                              <i class="fa fa-lock"></i>
+                            </div>
+                            <form action="<?php echo $_SERVER['PHP_SELF']?>" id="validate" class="form" method="post">
+                            </div>
+                            <div class="form-bottom">
+                          <form role="form" action="" method="post" class="login-form">
+                            <div class="form-group">
+                              <label for="login">Username:</label>
+                              <div class="loginInput"><input type="username" name="username" class="validate[required]" id="login" /></div>
+                              <div class="clear"></div>
+                              </div>
+                              <div class="form-group">
+                              <label for="pass">Password:</label>
+                              <div class="loginInput"><input type="password" name="password" class="validate[required]" id="pass" /></div>
+                              <div class="clear"></div>
+                              </div>
+                              <div class="remember">
+                              <input type="checkbox" id="remember" name="remember" /><label for="remember">Remember me</label></div>
+                              <input type="submit" value="Log me in" class="dredB logMeIn" name="submit" />
+                              <div class="clear"></div>
+                          
+                          </form>
+                          
+                        </div>
+                        </div>
+                    </div>
+
+
+
+
+
+ <!-- Javascript -->
+        <script src="assets/js/jquery-1.11.1.min.js"></script>
+        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/js/jquery.backstretch.min.js"></script>
+        <script src="assets/js/scripts.js"></script>
+
+        <script type="text/javascript" src="images/login.js"></script>
+
 
 </body>
 </html>
