@@ -2,7 +2,7 @@
 /**
  * Created by PhpStorm.
  * User: MAX
- * Date: 2017/4/25
+ * Date: 2017/4/22
  * Time: 15:45
  */
 function KDJfunction($StockName)
