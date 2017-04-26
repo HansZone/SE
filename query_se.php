@@ -395,10 +395,14 @@ if(!$db)
                     return $average;
                 }
 
-                $stock='google';
+                if (isset($_POST["submit"])){
                 $stock=@$_POST["submit"];
                 $lowest=findlowest($stock);
-                
+                }
+                else
+                {
+                    $lowest=findlowest("google");
+                }
                 $check_query=mysql_query("SELECT  StockID,Ticker,name,Company FROM stocks");
                 while ($row=mysql_fetch_assoc($check_query))
                 {
@@ -413,6 +417,7 @@ if(!$db)
                     }
 
                 }
+            
                 ?>
             </h3>
 
