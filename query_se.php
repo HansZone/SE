@@ -146,7 +146,7 @@ if(!$db)
                 <li class="demoTabs"><a href="#flot1" class="btn btn-wuxia">2.Get highest</a></li>
                 <li class="demoTabs"><a href="#flot2" class="btn btn-wuxia">3.Get average</a></li>
                 <li class="demoTabs"><a href="#flot3" class="btn btn-wuxia">4.Get lowest</a></li>
-                <li class="demoTabs"><a href="#flot4" class="btn btn-wuxia">5.Less GOOG</a></li>
+                <li class="demoTabs"><a href="#flot4" class="btn btn-wuxia">5.Get smaller</a></li>
             </ul>
         </div>
         <!-- /Page header -->
