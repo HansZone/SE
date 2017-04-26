@@ -272,7 +272,7 @@
 
 					<!-- Tab #flot3 -->
 					<div class="tab-pane" id="flot3">
-						<h2>Lowest stock price for each company in the latest one year is: </h2>
+						<h2>Lowest stock price for each company in the last one year is: </h2>
 						<br>
 						<h3>
 							<?php
@@ -354,7 +354,26 @@
 
 					<!-- Tab #flot4 -->
 					<div class="tab-pane" id="flot4">
-						<h2>Company whose average stock price lesser than the lowest of Google in the latest one year: </h2>
+
+						<div class="titleArea" method="post">
+    					<a href="#flot1">
+						<div class="button" >
+							
+			 				<form action="<?php echo $_SERVER['PHP_SELF']?>" id="validate" class="form" method="post">
+						<?php
+						$check_query = mysql_query("SELECT name from stocks where 1"); 
+							while ($row=mysql_fetch_row($check_query))
+							{
+								$sub="submit";
+								echo "<input type=".$sub." name=".$sub." value=".$row[0]." />";
+							}
+							?>
+							</a>				
+							</div>
+		
+    					</div>
+
+						<h2>Company whose average stock price lesser than the lowest of <?php echo @$_POST["submit"]?> in the latest one year: </h2>
 						<br>
 						<h3>
 							<?php
@@ -381,7 +400,8 @@
 								return $average;
 							}
 
-							$lowest=findlowest("google");
+							$stock=@$_POST["submit"];
+							$lowest=findlowest($stock);
 
 							$check_query=mysql_query("SELECT  StockID,Ticker,name,Company FROM stocks");
 							while ($row=mysql_fetch_assoc($check_query))
