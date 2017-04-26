@@ -181,18 +181,43 @@
 
 					<!-- Tab #flot1 -->
 					<div class="tab-pane" id="flot1">
-						<h2>The highest price for GOOGLE in the last ten days is: </h2>
+					<!-- Title area -->
+    					<div class="titleArea" method="post">
+    					<a href="#flot1">
+						<div class="button" >
+							
+			 				<form action="<?php echo $_SERVER['PHP_SELF']?>" id="validate" class="form" method="post">
+						<?php
+						$check_query = mysql_query("SELECT name from stocks where 1"); 
+							while ($row=mysql_fetch_row($check_query))
+							{
+								$sub="submit";
+								echo "<input type=".$sub." name=".$sub." value=".$row[0]." />";
+							}
+							?>
+							</a>				
+							</div>
+		
+    						</div>
+    						
+						<h2>The highest price for <?php echo @$_POST["submit"]?> in the last ten days is: </h2>
 						<br>
 					<h2>
 						<?php
-						$check_query=mysql_query("SELECT close FROM google_historical /*WHERE*/ /*date>='2017-04-14'*/ORDER BY date DESC LIMIT 10");
-						$price = 0;
-						while($row=mysql_fetch_assoc($check_query))
+						if(isset($_POST["submit"]))
 						{
-							if ($row["close"]>$price)
-								$price=$row["close"];
-						}
-						echo $price;
+
+							$stock=@$_POST["submit"];
+							$check_query=mysql_query("SELECT close FROM {$stock}_historical /*WHERE*/ /*date>='2017-04-14'*/ORDER BY date DESC LIMIT 10");
+							$price = 0;
+							while($row=mysql_fetch_assoc($check_query))
+							{
+								if ($row["close"]>$price)
+									$price=$row["close"];
+							}
+							echo $price;
+							}
+						// while(1){}
 						?>
 					</h2>
 						
@@ -201,19 +226,41 @@
 					
 					<!-- Tab #flot2 -->
 					<div class="tab-pane" id="flot2">
-						<h2>Average stock price of Microsoft in the latest one year is: </h2>
+
+						<div class="titleArea" method="post">
+						<div class="button" >
+			 				<form action="<?php echo $_SERVER['PHP_SELF']?>" id="validate" class="form" method="post">
+						<?php
+						$check_query = mysql_query("SELECT name from stocks where 1"); 
+							while ($row=mysql_fetch_row($check_query))
+							{
+								$sub="submit";
+								echo "<input type=".$sub." name=".$sub." value=".$row[0]." />";
+							}
+							?>				
+							</div>
+		
+    						</div>
+    						<div class="line"></div>
+
+
+    					<h2>The average price of <?php echo @$_POST["submit"]?> in the last year is: </h2>
 						<br>
 						<h2>
 							<?php
-							$check_query=mysql_query("SELECT * FROM microsoft_historical WHERE date>='2016-04-21' ");
-							$price = 0;
-							$i = 0; 
-							while ($row=mysql_fetch_assoc($check_query))
-							{
-							 	$price += $row["close"];
-							 	$i++; 
+							if(isset($_POST["submit"])){
+
+								$stock=@$_POST["submit"];
+								$check_query=mysql_query("SELECT * FROM {$stock}_historical WHERE date>='2016-04-21' ");
+								$price = 0;
+								$i = 0; 
+								while ($row=mysql_fetch_assoc($check_query))
+								{
+								 	$price += $row["close"];
+								 	$i++; 
+								}
+								echo $price/$i;
 							}
-							echo $price/$i;
 							?>
 
 
