@@ -34,7 +34,7 @@
 
 <body class="nobg loginPage">
 
-<?php
+<?php 
 
 // Connect to the database
 $conn = @mysql_connect("localhost","root","");
@@ -46,49 +46,83 @@ if(!$db)
 {
   die("Failed to connect to MySQL:". mysql_error());
 }
-$username=$password="";
-if(isset($_POST["submit"]))
+
+
+
+if(isset($_SESSION['users'])!="")
 {
-	if ($_SERVER["REQUEST_METHOD"] == "POST")
-	{
+ header("Location: Register.php");
+}
+
+include_once 'dbconn.php';
+
+if(isset($_POST["submit"])){
+ 
+  
      $username = test_input($_POST["username"]);
      $password= test_input($_POST["password"]);
-		//Check the user
-	$check_query = mysql_query("SELECT * from users where username='$username' and password='$password'");
-	if ($check_query)
-	{	 
-		$row=mysql_fetch_array($check_query);
-		if($row)
-		{
-				$_SESSION["username"]=$username;
-				$_SESSION["password"]=$password;
-			echo "<script>alert('You have successfully logged in!');location.href='index_se.php';</script>";
-		}
-		else
-		{
-			echo "<script>alert('Your Account is not right!');location.href='Log_in.php';</script>";
-		}
-	}
-	}
+
+
+
+ $check_query = mysql_query("SELECT * from users where username='$username'");
+
+if ($check_query)
+  {  
+    $row=mysql_fetch_array($check_query);
+    if($row)
+    {
+        $_SESSION["username"]=$username;
+        
+        echo "<script>alert('Error：this username is already registered!');location.href='Register.php';</script>";}
+
 }
+
+
+
+
+
+  if(mysql_query("INSERT INTO users(username,password) VALUES('$username','$password')"))
+ {
+
+echo "<script>alert('You have successfully registered!');location.href='Log_in.php';</script>";
  
-if(isset($_POST["btn-signup"]))
-{
-  echo "<script>alert('New account registration?');location.href='Register.php';</script>";
+
+ }else{
+  
+  echo "<script>alert('Sorry, the registration failed!');location.href='Register.php';</script>";
+
+
+ }
 }
 
+    //Check the user
+ 
+        
+    //}else{
+      //$password =MD5($password);
+
+     // $db = "INSERT INTO users(username,password)VALUES('$username','$password')";
 
 
+      //echo "<script>alert('You have successfully registered!');location.href='Log_in.php';</script>";   
+        //  } 
 
+//WRITE IN THE DATA
+//$password =MD5($password);
 
+//$db = "INSERT INTO users(username,password)VALUES('$username','$password')";
+//if(mysql_query($db,$conn)){
+    
+ //   echo "<script>alert('You have successfully registered!');location.href='Log_in.php';</script>";
+//} else {
+    
+    //echo "<script>alert('Sorry, the registration failed!');location.href='Register.php';</script>";
+    
+  
+//}
 
-
-
-
-
-
-
-
+//}
+ 
 
 function test_input($data) 
 {
@@ -97,6 +131,7 @@ function test_input($data)
    $data = htmlspecialchars($data);
    return $data;
 }
+
 ?>
 
 <!-- Main content wrapper -->
@@ -121,21 +156,30 @@ function test_input($data)
 
                   
                    
+                        
+                    </div>
+
+
+
+
+<!--register-->
+ 
+<div class="row">
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                           <div class="form-top">
                             <div class="form-top-left">
-
-                              <h3>Login to our site</h3>
-                                <p>Enter your username and password to log on:</p>
+                                <h3>Register for our site</h3>
+                                <p>Enter your username and password to register:</p>
                             </div>
                             <div class="form-top-right">
                               <i class="fa fa-lock"></i>
                             </div>
-                            <form action="<?php echo $_SERVER['PHP_SELF']?>" id="validate" class="form" method="post">
+                            
                             </div>
                             <div class="form-bottom">
                           <form role="form" action="" method="post" class="login-form">
-                            <div class="form-group">
+
+                              <div class="form-group">
                               <label for="login">Username:</label>
                               <div class="loginInput"><input type="username" name="username" class="validate[required]" id="login" /></div>
                               <div class="clear"></div>
@@ -145,22 +189,20 @@ function test_input($data)
                               <div class="loginInput"><input type="password" name="password" class="validate[required]" id="pass" /></div>
                               <div class="clear"></div>
                               </div>
-                              <div class="remember">
-                              <input type="checkbox" id="remember" name="remember" /><label for="remember">Remember me</label></div>
-                              <input type="submit" value="Log me in" class="dredB logMeIn" name="submit" />
-                              <div class="clear"></div>
 
-                              <button type="submit" name="btn-signup">Register</button>
+
+
+
+                              
+                              <input type="submit" value="Sign me up" class="dredB logMeIn" name="submit" />
+
+
+                              <div class="clear"></div>
                           
                           </form>
-                          
                         </div>
                         </div>
                     </div>
-
-
-
-
 
  <!-- Javascript -->
         <script src="assets/js/jquery-1.11.1.min.js"></script>
