@@ -8,6 +8,7 @@
 @$username=$_SESSION["username"];
 include_once 'VR.php';
 include_once 'KDJ.php';
+include_once 'RSI.php';
 ?>
 
 <!DOCTYPE html>
@@ -147,8 +148,8 @@ include_once 'KDJ.php';
 					<h1><span class="icon-file"></span> Prediction</h1>
 					<ul class="page-header-actions">
 						<li class="active demoTabs"><a href="#visualize" class="btn btn-wuxia">Indicator</a></li>
-						<li class="demoTabs"><a href="prediction_1.php" class="btn btn-wuxia">Price</a></li>
-						<li class="demoTabs"><a href="prediction_2.php" class="btn btn-wuxia">Prediction Strategy</a></li>
+						<li class="demoTabs"><a href="#flot1" class="btn btn-wuxia">Price</a></li>
+						<li class="demoTabs"><a href="#flot2" class="btn btn-wuxia">Prediction Strategy</a></li>
 					</ul>
 					
 					
@@ -169,7 +170,7 @@ include_once 'KDJ.php';
 				<div class="page-container tab-content">
 
 					<!-- Tab #visualize -->
-					<div class="tab-pane active" id="#visualize">
+					<div class="tab-pane active" id="visualize">
 						
 						<!-- Tab button-->
 						<div class="button" >
@@ -189,22 +190,40 @@ include_once 'KDJ.php';
 						
 					<h2>
 						<?php 
-						echo "you have selected ",@$_POST["submit"];
+						echo "You have selected ",@$_POST["submit"];
+                        echo "<br><br>";
 						?>
+
 					</h2>
-						<h3>VR indicator</h3>
-						<?php
-						$VR=new VR();
-						@$VRpridiction=$VR->CalculateVR($_POST["submit"]);
-						echo "The VR is ",$VRpridiction,"<br>";
-						$VR->Analysis($VRpridiction);
-						echo "<br><br>";
-						?>
 						<h3>KDJ indicator</h3>
 						<?php
-						@KDJfunction($_POST["submit"]);
-						?>     
-
+						@$r1=KDJfunction($_POST["submit"]);
+                        echo "<br><br>";
+						?>
+                        <h3>VR indicator</h3>
+                        <?php
+                        $VR=new VR();
+                        @$VRpridiction=$VR->CalculateVR($_POST["submit"]);
+                        echo "The VR is ",$VRpridiction,"<br>";
+                        $r2=$VR->Analysis($VRpridiction);
+                        echo "<br><br>";
+                        ?>
+                        <h3>RSI indicator</h3>
+                        <?php
+                        $RSI=new RSI();
+                        @$RSIpridiction=$RSI->CalculateRSI($_POST["submit"]);
+                        echo "The RSI is ",$RSIpridiction,"<br>";
+                        $r3=$RSI->Analysis($RSIpridiction);
+                        echo "<br><br>";
+                        ?>
+                        <h3>Accordingly, final suggestion is:
+                        <?php
+                        $r=$r1+$r2+$r3;
+                        if ($r>1)echo"BUY";
+                        else if ($r<-1) echo"SELL";
+                        else echo"HOLD or SIT OUT";
+                        ?>
+                        </h3>
 					</div>
 					<!-- Tab #visualize -->
 
