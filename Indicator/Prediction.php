@@ -224,7 +224,6 @@ include_once 'RSI.php';
                         else echo"HOLD or SIT OUT";
                         ?>
                         </h3>
-
 					</div>
 					<!-- Tab #visualize -->
 
@@ -236,6 +235,43 @@ include_once 'RSI.php';
 						<a href="Long_Term.php" class="btn btn-wuxia" target="blank">Long Term</a>
 						<a href="Short_Term.php" class="btn btn-wuxia" target="blank">Short Term</a>
 
+					</div>
+					<!-- /Tab #flot -->
+
+					<!-- Tab #flot -->
+					<div class="tab-pane" id="flot2">
+
+						<h2>Our prediction strategy is: </h2>
+						<br>
+                        <h3>KDJ</h3>
+						<p>&#9830;If K is smaller than 10 or D is smaller than 20 or J is smaller than 30, stock is oversold, this gives a suggestion to buy this stock.<br/>
+                            &#9830; If K is greater than 90 or D is greater than 80 or J is greater than 100, stock is overbought, this gives a suggestion to sell this stock.<br/>
+                            &#9830; Otherwise, it's a suggestion to hold or sit out
+                        </p>
+                        <h3>VR</h3>
+						<p>
+                            VR = total volume at rising days of N days/ total volume at declining days of N days.<br/>
+                            &#9830; If VR<0.7, it's likely to form a bottom which is a sign to buy.<br/>
+                            &#9830; If 0.7<=VR<1.5, it's likely to be safe which is a sign to hold.<br/>
+                            &#9830; If VR>=1.5, it's likely to form a top which is a sign to sell.
+                        <h3>RSI</h3>
+                        <p>
+                            &#9830; If RSI<30, stock is likely oversold which is a sign to buy.<br/>
+                            &#9830; If 30<=VR<70, it's likely to be safe which is a sign to hold.<br/>
+                            &#9830; If VR>=70, stock is likely overbought which is a sign to sell.
+                        </p>
+                        <h3>Combine</h3>
+                        <p>
+                            Define a counter,<br/>
+                            &#9830;if an indicator suggest to buy, counter+1,<br/>
+                            &#9830;if an indicator suggest to sell, counter-1,<br/>
+                            &#9830;if an indicator suggest to hold, counter doesn't change,<br/>
+                            after all indicators give their suggestion,<br/>
+                            &#9830;if counter>1, we recommend to buy,<br/>
+                            &#9830;if counter<-1, we recommend to sell,<br/>
+                            &#9830;otherwise, we suggest you to hold this stock.
+                        </p>
+						
 					</div>
 					<!-- /Tab #flot -->
 					
