@@ -369,7 +369,7 @@ if(!$db)
         
                         </div>
 
-            <h2>Company whose average stock price lesser than the lowest of <?php echo @$_POST["submit"]?> in the latest one year: </h2>
+            <h2>Company whose average stock price less than the lowest of <?php echo @$_POST["submit"]?> in the latest one year: </h2>
             <br>
             <h3>
                 <?php
