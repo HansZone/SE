@@ -61,6 +61,7 @@ if(isset($_POST["submit"])){
   
      $username = test_input($_POST["username"]);
      $password= test_input($_POST["password"]);
+     $email=test_input($_POST["email"]);
 
 
 
@@ -83,7 +84,24 @@ if ($check_query)
 
   if(mysql_query("INSERT INTO users(username,password) VALUES('$username','$password')"))
  {
+  require_once('class.phpmailer.php');
+                        require_once("class.smtp.php");
+                        $mail  = new PHPMailer();
 
+                        $mail->CharSet    ="UTF-8";                 
+                        $mail->IsSMTP();                            
+                        $mail->SMTPAuth   = true;                   
+                        $mail->SMTPSecure = "ssl";                  
+                        $mail->Host       = "smtp.gmail.com";       
+                        $mail->Port       = 465;                    
+                        $mail->Username   = "hkx4444@gmail.com";  
+                        $mail->Password   = "Hkx950715";       
+                        $mail->SetFrom('hkx4444@gmail.com', 'SE2-group2');    
+                        $mail->Subject    = 'Welcome to our stock system!';                     
+
+                        $mail->Body = 'Welcome to our system!';
+                        $mail->AddAddress($email, $username);
+                       $mail->Send();
 echo "<script>alert('You have successfully registered!');location.href='Log_in.php';</script>";
  
 
@@ -187,6 +205,11 @@ function test_input($data)
                               <div class="form-group">
                               <label for="pass">Password:</label>
                               <div class="loginInput"><input type="password" name="password" class="validate[required]" id="pass" /></div>
+                              <div class="clear"></div>
+                              </div>
+                              <div class="form-group">
+                              <label for="email">E-mail Address:</label>
+                              <div class="loginInput"><input type="text" name="email" class="validate[required]" id="email" /></div>
                               <div class="clear"></div>
                               </div>
 
