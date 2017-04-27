@@ -157,14 +157,6 @@ include_once 'RSI.php';
 				<!-- /Page header -->
 				
 <!--indicator-->		
-		<?php
-			if (isset($_POST["submit"]))
-			{	
-				$_SESSION["stockname"]=$_POST["submit"];
-			}
-			$stockname=$_SESSION["stockname"];
-
-		?>
 
 				<!-- Tab content -->
 				<div class="page-container tab-content">
@@ -197,31 +189,43 @@ include_once 'RSI.php';
 					</h2>
 						<h3>KDJ indicator</h3>
 						<?php
-						@$r1=KDJfunction($_POST["submit"]);
+                        if (isset($_POST["submit"]))
+                        {
+                            @$r1=KDJfunction($_POST["submit"]);
+                        }
                         echo "<br><br>";
 						?>
                         <h3>VR indicator</h3>
                         <?php
-                        $VR=new VR();
-                        @$VRpridiction=$VR->CalculateVR($_POST["submit"]);
-                        echo "The VR is ",$VRpridiction,"<br>";
-                        $r2=$VR->Analysis($VRpridiction);
+                        if (isset($_POST["submit"]))
+                        {
+                            $VR=new VR();
+                            @$VRpridiction=$VR->CalculateVR($_POST["submit"]);
+                            echo "The VR is ",$VRpridiction,"<br>";
+                            $r2=$VR->Analysis($VRpridiction);
+                        }
                         echo "<br><br>";
                         ?>
                         <h3>RSI indicator</h3>
                         <?php
-                        $RSI=new RSI();
-                        @$RSIpridiction=$RSI->CalculateRSI($_POST["submit"]);
-                        echo "The RSI is ",$RSIpridiction,"<br>";
-                        $r3=$RSI->Analysis($RSIpridiction);
+                        if (isset($_POST["submit"]))
+                        {
+                            $RSI=new RSI();
+                            @$RSIpridiction=$RSI->CalculateRSI($_POST["submit"]);
+                            echo "The RSI is ",$RSIpridiction,"<br>";
+                            $r3=$RSI->Analysis($RSIpridiction);
+                        }
                         echo "<br><br>";
                         ?>
                         <h3>Accordingly, final suggestion is:
                         <?php
-                        $r=$r1+$r2+$r3;
-                        if ($r>1)echo"BUY";
-                        else if ($r<-1) echo"SELL";
-                        else echo"HOLD or SIT OUT";
+                        if (isset($_POST["submit"]))
+                        {
+                            $r=$r1+$r2+$r3;
+                            if ($r>1)echo"BUY";
+                            else if ($r<-1) echo"SELL";
+                            else echo"HOLD or SIT OUT";
+                        }
                         ?>
                         </h3>
 					</div>
@@ -244,7 +248,7 @@ include_once 'RSI.php';
 						<h2>Our prediction strategy is: </h2>
 						<br>
                         <h3>KDJ</h3>
-						<p>&#9830;If K is smaller than 10 or D is smaller than 20 or J is smaller than 30, stock is oversold, this gives a suggestion to buy this stock.<br/>
+						<p>&#9830;If K is smaller than 10 or D is smaller than 20 or J is smaller than 0, stock is oversold, this gives a suggestion to buy this stock.<br/>
                             &#9830; If K is greater than 90 or D is greater than 80 or J is greater than 100, stock is overbought, this gives a suggestion to sell this stock.<br/>
                             &#9830; Otherwise, it's a suggestion to hold or sit out
                         </p>
